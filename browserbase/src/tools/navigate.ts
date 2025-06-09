@@ -19,7 +19,7 @@ const navigate: ToolFactory = captureSnapshot => defineTool({
       throw new Error('No active page found for navigate');
     }
     const action = async (): Promise<ToolActionResult> => {
-      await page.goto(params.url);
+      await page.goto(params.url, {timeout: 60000, waitUntil: 'domcontentloaded'});
       return { content: [{ type: 'text', text: `Navigated to ${params.url}` }] };
     };
 
